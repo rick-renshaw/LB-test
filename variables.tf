@@ -1,15 +1,15 @@
 variable "vpc_id" {
   type        = string
   description = "VPC to deploy into"
-  default     = "vpc-07068304fe34bf54a"
+  default     = "vpc-be96ecd9"
 }
 
 variable "subnet_id" {
   type    = string
-  default = "subnet-0ef49ff008bf44f9f"
+  default = "subnet-91d3c0c9"
 }
 
 variable "subnet_b_id" {
   type    = string
-  default = "subnet-03f20d8e5f100c4cf"
+  default = "subnet-i82d7c9bf"
 }
