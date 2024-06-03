@@ -44,7 +44,7 @@ resource "aws_instance" "nginx" {
   ami                    = data.aws_ami.ami.id
   instance_type          = "t3.micro"
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.http.id]
+  vpc_security_group_ids = [aws_security_group.http.id, aws_security_group.ssh.id]
   key_name               = "prod-aws-nexus-11-04-2021"
   user_data_base64       = filebase64("${path.module}/nginx.sh")
   tags = {
