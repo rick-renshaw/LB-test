@@ -4,5 +4,5 @@ data "aws_ami" "ami" {
     name   = "tag:Name"
     values = ["al2023-ami-2023.*-kernel-6.1-x86_64"]
   }
-  owners = ["Amazon"]
+  owners = ["amazon"]
 }
