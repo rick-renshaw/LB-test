@@ -26,7 +26,7 @@ resource "aws_instance" "nginx" {
   ami                    = var.ami
   instance_type          = "t3.micro"
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.http]
+  vpc_security_group_ids = [aws_security_group.http.id]
   key_name               = "prod-aws-nexus-11-04-2021"
   user_data_base64       = filebase64("${path.module}/nginx.sh")
   tags = {
@@ -40,6 +40,6 @@ resource "aws_lb" "lbtest" {
   load_balancer_type   = "application"
   name                 = "test-load-balancer"
   preserve_host_header = false
-  security_groups      = [aws_security_group.http]
+  security_groups      = [aws_security_group.http.id]
   subnets              = [var.subnet_id]
 }
