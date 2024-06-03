@@ -9,7 +9,7 @@ variable "subnet_id" {
   default = "subnet-0ef49ff008bf44f9f"
 }
 
-variable "ami" {
+variable "subnet_b_id" {
   type    = string
-  default = ""
+  default = "subnet-03f20d8e5f100c4cf"
 }

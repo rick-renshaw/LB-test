@@ -23,7 +23,7 @@ resource "aws_security_group" "http" {
 }
 
 resource "aws_instance" "nginx" {
-  ami                    = var.ami
+  ami                    = data.aws_ami.ami
   instance_type          = "t3.micro"
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.http.id]
@@ -41,5 +41,5 @@ resource "aws_lb" "lbtest" {
   name                 = "test-load-balancer"
   preserve_host_header = false
   security_groups      = [aws_security_group.http.id]
-  subnets              = [var.subnet_id]
+  subnets              = [var.subnet_id, var.subnet_b_id]
 }
