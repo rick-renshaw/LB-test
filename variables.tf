@@ -11,5 +11,5 @@ variable "subnet_id" {
 
 variable "subnet_b_id" {
   type    = string
-  default = "subnet-i82d7c9bf"
+  default = "subnet-82d7c9bf"
 }
