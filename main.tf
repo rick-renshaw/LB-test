@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "http" {
-  vpc_id      = var.vpd_id
+  vpc_id      = var.vpc_id
   name        = "lb-test-allow-http"
   description = "allow port 80"
   ingress {
@@ -23,7 +23,7 @@ resource "aws_security_group" "http" {
 }
 
 resource "aws_security_group" "ssh" {
-  vpc_id      = var.vpd_id
+  vpc_id      = var.vpc_id
   name        = "lb-test-allow-ssh"
   description = "allow port 22"
   ingress {
@@ -60,4 +60,22 @@ resource "aws_lb" "lbtest" {
   preserve_host_header = false
   security_groups      = [aws_security_group.http.id]
   subnets              = [var.subnet_id, var.subnet_b_id]
+}
+
+resource "aws_lb_target_group" "port_80" {
+  name     = "LB-test"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+
+}
+
+resource "aws_lb_listener" "port_80" {
+  load_balancer_arn = aws_lb.lbtest.arn
+  port              = 80
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.port_80
+  }
 }

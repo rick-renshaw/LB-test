@@ -1,4 +1,4 @@
-variable "vpd_id" {
+variable "vpc_id" {
   type        = string
   description = "VPC to deploy into"
   default     = "vpc-07068304fe34bf54a"
