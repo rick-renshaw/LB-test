@@ -67,7 +67,8 @@ resource "aws_instance" "nginx" {
 resource "aws_lb" "lbtest" {
   internal                   = false
   ip_address_type            = "ipv4"
-  load_balancer_type         = "application"
+  # load_balancer_type         = "application"
+  load_balancer_type         = "network"
   name                       = "test-load-balancer"
   preserve_host_header       = false
   security_groups            = [aws_security_group.http.id]
@@ -84,7 +85,8 @@ resource "aws_lb" "lbtest" {
 resource "aws_lb_target_group" "port_80" {
   name     = "LB-test"
   port     = 80
-  protocol = "HTTP"
+  # protocol = "HTTP"
+  protocol = "TCP"
   vpc_id   = var.vpc_id
   health_check {
     enabled           = true
@@ -98,7 +100,8 @@ resource "aws_lb_target_group" "port_80" {
 resource "aws_lb_listener" "port_80" {
   load_balancer_arn = aws_lb.lbtest.arn
   port              = 80
-  protocol          = "HTTP"
+  # protocol          = "HTTP"
+  protocol          = "TCP"
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.port_80.arn
