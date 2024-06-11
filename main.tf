@@ -68,7 +68,7 @@ resource "aws_lb" "lbtest" {
   internal                   = false
   ip_address_type            = "ipv4"
   # load_balancer_type         = "application"
-  load_balancer_type         = "network"
+  load_balancer_type         = local.type
   name                       = "test-load-balancer"
   preserve_host_header       = false
   security_groups            = [aws_security_group.http.id]
@@ -86,14 +86,14 @@ resource "aws_lb_target_group" "port_80" {
   name     = "LB-test"
   port     = 80
   # protocol = "HTTP"
-  protocol = "TCP"
+  protocol = local.http_protocol
   vpc_id   = var.vpc_id
   health_check {
     enabled           = true
     healthy_threshold = 3
     interval          = 30
-    matcher           = "200-299"
-    path              = "/"
+    # matcher           = "200-299"
+    # path              = "/"
   }
 }
 
@@ -101,7 +101,7 @@ resource "aws_lb_listener" "port_80" {
   load_balancer_arn = aws_lb.lbtest.arn
   port              = 80
   # protocol          = "HTTP"
-  protocol          = "TCP"
+  protocol          = local.http_protocol
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.port_80.arn
