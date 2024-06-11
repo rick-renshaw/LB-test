@@ -123,4 +123,4 @@ resource "aws_lb_target_group_attachment" "target" {
 #   versioning {
 #     enabled = true
 #   }
-}
+# }
