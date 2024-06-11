@@ -75,11 +75,11 @@ resource "aws_lb" "lbtest" {
   subnets                    = [var.subnet_id, var.subnet_b_id]
   enable_deletion_protection = true
   drop_invalid_header_fields = true
-  access_logs {
-    bucket  = aws_s3_bucket.fib.bucket
-    prefix  = "test-lb"
-    enabled = true
-  }
+#   access_logs {
+#     bucket  = aws_s3_bucket.fib.bucket
+#     prefix  = "test-lb"
+#     enabled = true
+#   }
 }
 
 resource "aws_lb_target_group" "port_80" {
@@ -114,14 +114,13 @@ resource "aws_lb_target_group_attachment" "target" {
   port             = 80
 }
 
-resource "aws_s3_bucket" "fib" {
-  bucket        = "mpspark-test-bucket"
-  force_destroy = true
-  tags = {
-    Name = "foo-bucket"
-  }
-  versioning {
-    enabled = true
-  }
-  
+# resource "aws_s3_bucket" "fib" {
+#   bucket        = "mpspark-test-bucket"
+#   force_destroy = true
+#   tags = {
+#     Name = "foo-bucket"
+#   }
+#   versioning {
+#     enabled = true
+#   }
 }
